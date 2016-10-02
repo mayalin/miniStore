@@ -30,4 +30,8 @@ Rails.application.routes.draw do
   namespace :account do
     resources :orders
   end
+
+  namespace :admin do
+    resources :orders
+  end
 end
