@@ -1,0 +1,30 @@
+<h2>订单列表</h2>
+
+<table class="table table-bordered">
+  <thead>
+    <tr>
+      <th>用户</th>
+      <th>生成时间</th>
+      <th>支付状态</th>
+      <th>订单详情</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @orders.each do |order| %>
+      <tr>
+        <td><%= order.user.email %></td>
+        <td><%= order.created_at.to_s(:long) %></td>
+        <td>
+          <% if !order.is_paid? %>
+            <p>未支付</p>
+          <% else %>
+            <p>已支付</p>
+          <% end %>
+        </td>
+        <td><%= link_to(order.token, order_path(order.token)) %></td>
+      </tr>
+    <% end %>
+
+  </tbody>
+</table>
