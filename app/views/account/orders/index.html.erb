@@ -5,6 +5,7 @@
     <tr>
       <th>#</th>
       <th>生成时间</th>
+      <th>订单状态</th>
       <th>选项</th>
     </tr>
   </thead>
@@ -14,7 +15,14 @@
       <tr>
         <td><%= link_to(order.id, order_path(order.token)) %></td>
         <td><%= order.created_at.to_s(:long) %></td>
-        <td><%= link_to("取消订单", cancelled_order_path(order.token), method: :post) %></td>
+        <td><%= order.aasm_state %></td>
+        <td>
+          <% if order.order_placed? || order.paid? %>
+            <%= link_to("取消订单", cancelled_order_path(order.token), method: :post, class:"btn btn-primary") %>
+          <% else %>
+            <%= link_to("取消订单", cancelled_order_path(order.token), method: :post, class: "btn btn-primary disabled") %>
+          <% end %>
+        </td>
       </tr>
     <% end %>
 
