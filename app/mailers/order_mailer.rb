@@ -14,4 +14,13 @@ class OrderMailer < ApplicationMailer
 
     mail(to: "mayalin2012@gmail.com", subject: "#{order.user.email} 取消订单 #{order.token}")
   end
+
+  def notify_order_shipping(order)
+    @order = order
+    @user = order.user
+    @product_lists = @order.product_lists
+
+    mail(to: @user.email, subject: "[UNISA] 您的订单已发货，以下是您这次购物明细 #{order.token}")
+  end
+
 end

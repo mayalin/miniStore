@@ -56,6 +56,14 @@ class OrdersController < ApplicationController
     redirect_to account_orders_path, notice: "订单已取消"
   end
 
+  def shipping
+    @order = Order.find_by_token(params[:id])
+    @order.ship!
+    OrderMailer.notify_order_shipping(@order).deliver!
+
+    redirect_to admin_orders_path, notice: "订单已发货"
+  end
+
   private
 
   def order_params

@@ -6,6 +6,7 @@
       <th>用户</th>
       <th>生成时间</th>
       <th>订单状态</th>
+      <th>选项</th>
       <th>订单详情</th>
     </tr>
   </thead>
@@ -16,6 +17,13 @@
         <td><%= order.user.email %></td>
         <td><%= order.created_at.to_s(:long) %></td>
         <td><%= order.aasm_state %></td>
+        <td>
+          <% if order.paid? %>
+            <%= link_to("出货", shipping_order_path(order.token), method: :post, class:"btn btn-primary") %>
+          <% else %>
+            <%= link_to("出货", shipping_order_path(order.token), method: :post, class: "btn btn-primary disabled") %>
+          <% end %>
+        </td>
         <td><%= link_to(order.token, order_path(order.token)) %></td>
       </tr>
     <% end %>
