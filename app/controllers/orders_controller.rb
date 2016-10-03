@@ -53,7 +53,7 @@ class OrdersController < ApplicationController
     @order.cancel_order!
     OrderMailer.notify_order_cancelled(@order).deliver!
 
-    redirect_to account_orders_path, notice: "订单取消已申请"
+    redirect_to account_orders_path, notice: "订单已取消"
   end
 
   private
