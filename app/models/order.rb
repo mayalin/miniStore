@@ -16,10 +16,6 @@ class Order < ApplicationRecord
     self.update_columns(payment_method: method)
   end
 
-  # def pay!
-  #   self.update_columns(is_paid: true)
-  # end
-
   include AASM
 
   aasm do
