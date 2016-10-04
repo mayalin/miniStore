@@ -14,6 +14,7 @@ class OrdersController < ApplicationController
         product_list.product_name = cart_item.product.title
         product_list.product_price = cart_item.product.price
         product_list.quantity = cart_item.quantity
+        product_list.size = cart_item.product.size
         product_list.save
       end
 
